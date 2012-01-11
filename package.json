@@ -1,0 +1,13 @@
+{
+    "author": "darookee",
+    "name": "TicTacToffee",
+    "version": "0.1.0",
+    "dependencies": {
+        "coffee-script": ">= 1.2.0",
+        "coffeekup": ">= 0.3.1",
+        "socket.io": ">= 0.8.7",
+        "connect": ">= 1.8.5",
+        "express": ">= 2.5.4",
+        "ccss": ">=0.1.2"
+    }
+}
