@@ -168,4 +168,5 @@ gameSocket.on 'connection', ( socket ) ->
     socket.on 'disconnect', ( data ) ->
         disconnectPlayer socket.id, myGame, myPlayer
 
-app.listen 8319
+app.listen 8319, () ->
+    logger.info 'Listening on http://' + app.address().address + ':' + app.address().port
