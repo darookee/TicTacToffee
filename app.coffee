@@ -1,5 +1,6 @@
 express = require 'express'
 connect = require 'connect'
+http = require 'http'
 
 ccss = require 'ccss'
 coffeekup = require 'coffeekup'
@@ -26,7 +27,9 @@ views =
                     'Join'
                 div id: 'status'
 
-app = express.createServer()
+app = express()
+server = http.createServer(app)
+
 app.configure () ->
     app.use app.router
     app.use connect.static __dirname + '/public'
@@ -47,7 +50,7 @@ app.get '/app.js', ( req, res ) ->
     res.setHeader 'Content-Type', 'text/javascript'
     res.send coffeescript.compile coffeeJS
 
-io = sio.listen app
+io = sio.listen server
 io.enable 'browser client minification'
 io.enable 'browser client etag'
 io.enable 'browser client gzip'
@@ -168,5 +171,5 @@ gameSocket.on 'connection', ( socket ) ->
     socket.on 'disconnect', ( data ) ->
         disconnectPlayer socket.id, myGame, myPlayer
 
-app.listen 8319, () ->
-    logger.info 'Listening on http://' + app.address().address + ':' + app.address().port
+server.listen 8319, () ->
+    logger.info 'Listening on http://' + server.address().address + ':' + server.address().port
